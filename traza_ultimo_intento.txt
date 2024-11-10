@@ -1,0 +1,5 @@
+Intento 1: 1245 -> Aciertos: 0, Coincidencias: 3
+Intento 2: 4523 -> Aciertos: 2, Coincidencias: 1
+Intento 3: 4532 -> Aciertos: 3, Coincidencias: 0
+Intento 4: 4536 -> Aciertos: 3, Coincidencias: 0
+Intento 5: 4531 -> Aciertos: 4, Coincidencias: 0
