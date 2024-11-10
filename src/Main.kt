@@ -47,6 +47,7 @@ fun menu() {
 fun jugar() {
     val numeroSecreto = generarNumeroSecreto()
     var intentos = 0
+    val traza = StringBuilder()  // Para almacenar cada intento
 
     println("${YELLOW}Intenta adivinar el número secreto de $NUMERO_DIGITOS dígitos entre 1 y 6 sin repetir cifras.${RESET}")
 
@@ -65,9 +66,12 @@ fun jugar() {
         val (aciertos, coincidencias) = evaluarIntento(intentoUsuario, numeroSecreto)
         println("${GREEN}Aciertos: $aciertos${RESET}, ${YELLOW}Coincidencias: $coincidencias${RESET}")
 
+        // Registrar el intento en el historial de traza
+        traza.append("Intento $intentos: $intentoUsuario -> Aciertos: $aciertos, Coincidencias: $coincidencias\n")
+
         // Verificar si el usuario adivinó el número
         if (aciertos == NUMERO_DIGITOS) {
-            println("$${GREEN}¡Felicidades! Adivinaste el número en $intentos intentos.${RESET}")
+            println("${GREEN}¡Felicidades! Adivinaste el número en $intentos intentos.${RESET}")
             break
         }
 
@@ -75,6 +79,7 @@ fun jugar() {
             println("${WHITE}¡Lo siento! No lograste adivinar el número. El número era: $numeroSecreto${RESET}")
         }
     }
+    guardarTraza(traza.toString())  // Guarda la traza después del juego
 }
 
 // Verifica si el número ingresado es válido (4 dígitos, sin repetir, entre 1 y 6)
@@ -115,13 +120,17 @@ fun verTraza() {
 
 // Función principal que inicia el programa
 fun main() {
-    menu()
-    when (readln()) {
-        "1" -> jugar()
-        "2" -> println("${BLUE}Funcionalidad de ver última traza en desarrollo.${RESET}")
-        "3" -> {
-            println("${PURPLE}¡Gracias por jugar!${RESET}")
-            return
+    var opcion: String
+    do {
+        menu()
+        opcion = readln()
+        when (opcion) {
+            "1" -> jugar()
+            "2" -> verTraza()
+            "3" -> {
+                println("${PURPLE}¡Gracias por jugar!${RESET}")
+            }else -> println("${RED}Opción no válida. Por favor, selecciona una opción válida.${RESET}")
         }
-    }
+    } while (opcion != "3")  // El bucle continuará hasta que el usuario seleccione la opción "3"
 }
+
