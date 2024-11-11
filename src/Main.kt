@@ -1,5 +1,4 @@
 import java.io.File
-
 // Códigos de color de fondo
 const val BG_BLACK = "\u001B[40m"
 const val BG_RED = "\u001B[41m"
@@ -9,7 +8,6 @@ const val BG_BLUE = "\u001B[44m"
 const val BG_PURPLE = "\u001B[45m"
 const val BG_CYAN = "\u001B[46m"
 const val BG_WHITE = "\u001B[47m"
-
 // Colores ANSI básicos
 const val RESET = "\u001B[0m"
 const val BLACK = "\u001B[30m"
@@ -33,7 +31,6 @@ fun generarNumeroSecreto(): String {
     val digitos = (1..6).shuffled().take(NUMERO_DIGITOS)
     return digitos.joinToString("")
 }
-
 // Muestra el menú principal
 fun menu() {
     println("${BOLD}${CYAN}Bienvenido a Guess a Number${RESET}")
@@ -42,13 +39,11 @@ fun menu() {
     println("3. Salir${RESET}")
     print("Selecciona una opción: ")
 }
-
-// Lógica principal del juego
+// Lógica del juego
 fun jugar() {
     val numeroSecreto = generarNumeroSecreto()
     var intentos = 0
-    val traza = StringBuilder()  // Para almacenar cada intento
-
+    val traza = StringBuilder()
     println("${YELLOW}Intenta adivinar el número secreto de $NUMERO_DIGITOS dígitos entre 1 y 6 sin repetir cifras.${RESET}")
 
     while (intentos < INTENTOS_MAXIMOS) {
@@ -56,7 +51,7 @@ fun jugar() {
         print("${CYAN}Intento $intentos/$INTENTOS_MAXIMOS: ${RESET}")
         val intentoUsuario = readln()
 
-        // Validación del input del usuario
+        // Validación entrada del usuario
         if (!esNumeroValido(intentoUsuario)) {
             println("${RED}Entrada no válida. Asegúrate de ingresar un número de $NUMERO_DIGITOS cifras sin repetidos y entre 1 y 6.${RESET}")
             continue
@@ -79,7 +74,7 @@ fun jugar() {
             println("${WHITE}¡Lo siento! No lograste adivinar el número. El número era: $numeroSecreto${RESET}")
         }
     }
-    guardarTraza(traza.toString())  // Guarda la traza después del juego
+    guardarTraza(traza.toString())
 }
 
 // Verifica si el número ingresado es válido (4 dígitos, sin repetir, entre 1 y 6)
@@ -131,6 +126,5 @@ fun main() {
                 println("${PURPLE}¡Gracias por jugar!${RESET}")
             }else -> println("${RED}Opción no válida. Por favor, selecciona una opción válida.${RESET}")
         }
-    } while (opcion != "3")  // El bucle continuará hasta que el usuario seleccione la opción "3"
+    } while (opcion != "3")
 }
-
